@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whoohu Store Qatar | Find something you’ll love</title>
+  <meta name="description" content="Discover carefully selected fashion, beauty, gadgets, home essentials, and gifts together in one easy-to-shop destination for customers in Qatar." />
+  
+  <!-- Favicon SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2228%22 fill=%22%23183C2B%22/><text y=%2268%22 x=%2250%22 font-family=%22serif%22 font-size=%2260%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%23F8F5EE%22>W</text></svg>" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+  <link rel="stylesheet" href="styles/responsive.css" />
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. SLIM ANNOUNCEMENT BAR
+       ======================================================================== -->
+  <aside class="announcement-bar" aria-label="Announcement">
+    <div class="container announcement-content">
+      <div class="announcement-links">
+        <span class="announcement-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Deliver to: <strong>Qatar (Doha & Municipalities)</strong>
+        </span>
+      </div>
+
+      <div class="announcement-text">
+        <span class="announcement-flag">🇶🇦</span>
+        <span>Fast delivery across Qatar • Secure checkout • Easy returns</span>
+      </div>
+
+      <div class="announcement-links">
+        <span class="announcement-link">
+          <span>QAR (ر.ق)</span>
+        </span>
+        <a href="#newsletter" class="announcement-link">Get 10% Off First Order</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       2. STICKY NAVIGATION HEADER
+       ======================================================================== -->
+  <header class="header-wrapper" role="banner">
+    <div class="container">
+      <div class="main-header">
+        
+        <!-- Mobile Hamburger Toggle -->
+        <button class="mobile-menu-toggle action-btn" id="mobileMenuToggle" aria-label="Open navigation menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+
+        <!-- Left: Whoohu Logo with elegant "W" symbol -->
+        <a href="#" class="logo" aria-label="Whoohu Store Home">
+          <div class="logo-symbol">
+            <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 8L10 24L16 11L22 24L27 8" stroke="#F8F5EE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="16" cy="7" r="2.5" fill="#D98A72"/>
+            </svg>
+          </div>
+          <div class="logo-text-group">
+            <div class="logo-title">Whoohu <span>Store</span></div>
+            <div class="logo-subtitle">Qatar Lifestyle</div>
+          </div>
+        </a>
+
+        <!-- Center: Large Search Bar -->
+        <div class="search-container">
+          <form class="search-form" id="mainSearchForm" role="search">
+            <div class="search-input-wrapper">
+              <span class="search-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </span>
+              <input 
+                type="text" 
+                class="search-input" 
+                id="mainSearchInput"
+                placeholder="Search for products, brands & more…" 
+                autocomplete="off"
+                aria-label="Search products"
+              />
+              <button type="button" class="search-clear-btn" id="searchClearBtn" aria-label="Clear search">✕</button>
+            </div>
+            
+            <!-- Live Search Autocomplete Dropdown -->
+            <div class="search-results-dropdown" id="searchResultsDropdown"></div>
+          </form>
+        </div>
+
+        <!-- Right: Actions (Wishlist, Account, Cart Counter) -->
+        <div class="header-actions">
+          
+          <!-- Wishlist -->
+          <button class="action-btn" id="wishlistTrigger" aria-label="Wishlist" onclick="filterByTab('all'); document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' }); showToast('Wishlist items highlighted in catalog', '❤️');">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            </svg>
+            <span class="action-badge" id="wishlistCounterBadge" style="display: none;">0</span>
+          </button>
+
+          <!-- Account -->
+          <button class="action-btn" id="accountTrigger" aria-label="Account" onclick="showToast('Whoohu Member VIP Access active • Welcome to Qatar Store', '👤');">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+          </button>
+
+          <!-- Shopping Cart with Item Counter -->
+          <button class="action-btn" id="cartTrigger" aria-label="Shopping Cart">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            <span class="action-badge" id="cartCounterBadge" style="display: none;">0</span>
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- Navigation Row -->
+      <nav class="nav-bar" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#catalog" class="nav-link active" data-category="all">Shop All</a>
+          </li>
+          <li class="nav-item">
+            <a href="#catalog" class="nav-link" data-category="fashion">Fashion</a>
+          </li>
+          <li class="nav-item">
+            <a href="#catalog" class="nav-link" data-category="beauty">Beauty</a>
+          </li>
+          <li class="nav-item">
+            <a href="#catalog" class="nav-link" data-category="gadgets">Gadgets</a>
+          </li>
+          <li class="nav-item">
+            <a href="#catalog" class="nav-link" data-category="home">Home & Kitchen</a>
+          </li>
+          <li class="nav-item">
+            <a href="#catalog" class="nav-link" data-category="gifts">Gifts</a>
+          </li>
+          <li class="nav-item">
+            <a href="#catalog" class="nav-link" data-category="new">
+              New Arrivals
+              <span class="nav-badge-new">NEW</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- Mobile Search Bar (Only shown on small screens) -->
+  <div class="mobile-search-bar" style="display: none;">
+    <div class="search-input-wrapper">
+      <span class="search-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </span>
+      <input type="text" class="search-input" placeholder="Search products in Qatar…" oninput="document.getElementById('mainSearchInput').value = this.value; document.getElementById('mainSearchInput').dispatchEvent(new Event('input'));" />
+    </div>
+  </div>
+
+  <main>
+    <!-- ========================================================================
+         3. HOMEPAGE HERO SECTION
+         ======================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-background-decor"></div>
+      <div class="container hero-grid">
+        
+        <!-- Left: Hero Text & Call to Action -->
+        <div class="hero-content">
+          <div class="hero-tag">
+            <span class="hero-tag-dot"></span>
+            <span>Welcome to Qatar's Curated Online Destination</span>
+          </div>
+
+          <h1 class="hero-headline">
+            Find something<br />
+            <em>you’ll love.</em>
+          </h1>
+
+          <p class="hero-description">
+            Discover stylish fashion, beauty essentials, smart gadgets, home favourites and thoughtful gifts — all in one place.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#catalog" class="btn btn-primary btn-lg" onclick="filterByTab('all');">
+              Shop Now →
+            </a>
+            <a href="#categories" class="btn btn-secondary btn-lg">
+              Explore Categories
+            </a>
+          </div>
+
+          <!-- Small Trust Indicators -->
+          <div class="hero-trust-indicators">
+            <div class="trust-item">
+              <span class="trust-check">✓</span>
+              <span>Qatar-wide delivery</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-check">✓</span>
+              <span>Secure shopping</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-check">✓</span>
+              <span>Easy returns</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Premium Lifestyle Product Collage -->
+        <div class="hero-collage-wrapper" id="heroCollage">
+          <div class="hero-collage">
+            
+            <!-- Main Editorial Image (Fashion & Lifestyle) -->
+            <div class="collage-main">
+              <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1000&q=80" alt="Whoohu Lifestyle Qatar" />
+            </div>
+
+            <!-- Floating Card: Fashion Accessories -->
+            <div class="collage-float float-fashion" onclick="openProductQuickView('f-2')" title="View Saddle Crossbody Bag">
+              <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=500&q=80" alt="Leather Bag" />
+            </div>
+
+            <!-- Floating Card: Beauty Elixir -->
+            <div class="collage-float float-beauty" onclick="openProductQuickView('b-1')" title="View Royal Amber Oud">
+              <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=500&q=80" alt="Beauty Perfume" />
+            </div>
+
+            <!-- Floating Card: Smart Gadgets -->
+            <div class="collage-float float-gadget" onclick="openProductQuickView('g-1')" title="View Aura Pro Headphones">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80" alt="ANC Headphones" />
+            </div>
+
+            <!-- Floating Card: Luxury Gifts & Home -->
+            <div class="collage-float float-gifts" onclick="openProductQuickView('gift-1')" title="View Doha Heritage Gift Hamper">
+              <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=500&q=80" alt="Gift Hamper" />
+            </div>
+
+            <!-- Floating Tag: Trending in Doha -->
+            <div class="floating-badge badge-top-doha">
+              <span>🇶🇦</span>
+              <span>Trending in Doha • 285 QAR</span>
+            </div>
+
+            <!-- Floating Tag: Rating Star -->
+            <div class="floating-badge badge-rating-qatar">
+              <span class="badge-star">★ 4.9</span>
+              <span>Trusted by 4,200+ in Qatar</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         4. SHOP BY CATEGORY SECTION
+         ======================================================================== -->
+    <section class="categories-section" id="categories">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-label">Curated Collections</span>
+          <h2 class="section-title">Shop by category</h2>
+          <p class="section-subtitle">“Everything you need. Something for every mood.”</p>
+        </div>
+
+        <!-- 5 Large Attractive Category Cards -->
+        <div class="categories-grid" id="categoriesGrid">
+          <!-- Dynamically populated via renderCategoryCards() -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         5. PRODUCT CATALOG SHOWCASE SECTION
+         ======================================================================== -->
+    <section class="catalog-section" id="catalog">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-label">Selected For Qatar</span>
+          <h2 class="section-title">Discover Our Favourites</h2>
+          <p class="section-subtitle">Hand-picked products combining contemporary flair, premium craftsmanship, and daily utility.</p>
+        </div>
+
+        <!-- Controls: Category Filter Tabs & Sort -->
+        <div class="catalog-controls">
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">All Products</button>
+            <button class="filter-tab" data-filter="fashion">Fashion</button>
+            <button class="filter-tab" data-filter="beauty">Beauty</button>
+            <button class="filter-tab" data-filter="gadgets">Gadgets</button>
+            <button class="filter-tab" data-filter="home">Home & Kitchen</button>
+            <button class="filter-tab" data-filter="gifts">Gifts</button>
+            <button class="filter-tab" data-filter="trending">Trending in Doha</button>
+            <button class="filter-tab" data-filter="new">New In</button>
+          </div>
+
+          <div class="sort-wrapper">
+            <span>Sort by:</span>
+            <select class="sort-select" id="catalogSortSelect">
+              <option value="featured">Featured Curations</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Products Grid (24+ curated luxury products) -->
+        <div class="products-grid" id="productsGrid">
+          <!-- Populated dynamically via renderProducts() -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         6. DEAL OF THE WEEK (Doha Weekend Spotlight)
+         ======================================================================== -->
+    <section class="deal-banner-section">
+      <div class="container">
+        <div class="deal-card">
+          <div class="deal-grid">
+            
+            <div class="deal-content">
+              <span class="deal-tag">Doha Weekend Spotlight</span>
+              <h2 class="deal-title">The Royal Taif Rose & Silk Scarf Set</h2>
+              <p class="deal-desc">
+                An exclusive Qatar bundle uniting our pure Taif Rose Extrait de Parfum with the hand-fringed Mongolian Cashmere Ombré Scarf. Gift-boxed with signature calligraphy ribbon.
+              </p>
+
+              <!-- Live Countdown -->
+              <div class="countdown-box">
+                <div class="countdown-unit">
+                  <div class="countdown-num" id="countDays">02</div>
+                  <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-unit">
+                  <div class="countdown-num" id="countHours">14</div>
+                  <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-unit">
+                  <div class="countdown-num" id="countMins">38</div>
+                  <div class="countdown-label">Mins</div>
+                </div>
+                <div class="countdown-unit">
+                  <div class="countdown-num" id="countSecs">19</div>
+                  <div class="countdown-label">Secs</div>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 28px;">
+                <span style="font-size: 2rem; font-weight: 800; color: var(--c-white);">580 QAR</span>
+                <span style="font-size: 1.2rem; color: rgba(255,255,255,0.6); text-decoration: line-through;">740 QAR</span>
+                <span class="badge badge-peach" style="font-size: 0.8rem;">Save 160 QAR</span>
+              </div>
+
+              <button class="btn btn-peach btn-lg" onclick="addToCart('b-1', 1); addToCart('f-4', 1); openCartDrawer();">
+                Claim Weekend Offer →
+              </button>
+            </div>
+
+            <div class="deal-image-wrapper">
+              <img class="deal-image" src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=900&q=80" alt="Royal Taif Perfume & Silk Set" />
+              <div class="deal-discount-pill">
+                <span>25%</span>
+                <small>OFF</small>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         7. WHY CHOOSE Whoohu (Qatar Shopping Perks)
+         ======================================================================== -->
+    <section class="trust-section">
+      <div class="container">
+        <div class="trust-grid">
+          
+          <div class="trust-card">
+            <div class="trust-icon-box">🇶🇦</div>
+            <div>
+              <h4 class="trust-title">Qatar-Wide Fast Delivery</h4>
+              <p class="trust-subtitle">Same-day delivery across Doha & Lusail; 24-48 hours to all Qatar municipalities.</p>
+            </div>
+          </div>
+
+          <div class="trust-card">
+            <div class="trust-icon-box">🛡️</div>
+            <div>
+              <h4 class="trust-title">100% Authentic Quality</h4>
+              <p class="trust-subtitle">Hand-inspected, genuine lifestyle products curated for style, durability, and elegance.</p>
+            </div>
+          </div>
+
+          <div class="trust-card">
+            <div class="trust-icon-box">💳</div>
+            <div>
+              <h4 class="trust-title">Flexible Qatar Payments</h4>
+              <p class="trust-subtitle">Apple Pay, QPay, Debit/Credit Cards & Cash on Delivery (COD) right at your doorstep.</p>
+            </div>
+          </div>
+
+          <div class="trust-card">
+            <div class="trust-icon-box">🔄</div>
+            <div>
+              <h4 class="trust-title">14-Day Hassle-Free Returns</h4>
+              <p class="trust-subtitle">Simple doorstep pickup anywhere in Qatar with our friendly customer service team.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         8. EDITORIAL LOOKBOOK (The Qatar Lifestyle Edit)
+         ======================================================================== -->
+    <section class="editorial-section">
+      <div class="container">
+        <div class="editorial-card">
+          <img class="editorial-img" src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=1000&q=80" alt="The Qatar Lifestyle Edit" loading="lazy" />
+          
+          <div class="editorial-content">
+            <span class="editorial-label">The Qatar Lifestyle Edit</span>
+            <h2 class="editorial-title">Curated for modern living in Doha.</h2>
+            <p class="editorial-text">
+              From morning espresso along The Pearl boardwalk to sunset gatherings at Katara Cultural Village, Whoohu brings together objects of beauty and refined function tailored to the vibrant rhythm of Qatar.
+            </p>
+            <div>
+              <a href="#catalog" class="btn btn-primary" onclick="filterByTab('home');">
+                Explore The Edit →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         9. VERIFIED QATAR SHOPPER REVIEWS
+         ======================================================================== -->
+    <section class="reviews-section">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-label">Community Love</span>
+          <h2 class="section-title">Loved by Shoppers Across Qatar</h2>
+          <p class="section-subtitle">Real feedback from verified customers enjoying Whoohu Store.</p>
+        </div>
+
+        <div class="reviews-grid">
+          
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">
+              “The Royal Taif Rose perfume arrived within 3 hours at The Pearl! The packaging was exquisite, like receiving a gift from a high-end French boutique.”
+            </p>
+            <div class="review-author-row">
+              <img class="review-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Fatima Al-Kuwari" />
+              <div>
+                <div class="review-name">Fatima Al-Kuwari</div>
+                <div class="review-location">📍 The Pearl-Qatar</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">
+              “Best online shopping experience in Qatar. The solid walnut MagSafe charging dock looks sensational on my office desk in Lusail. Truly premium!”
+            </p>
+            <div class="review-author-row">
+              <img class="review-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="Mohammed Al-Sulaiti" />
+              <div>
+                <div class="review-name">Mohammed Al-Sulaiti</div>
+                <div class="review-location">📍 Lusail Marina</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">
+              “Whoohu is my new secret weapon for wedding and housewarming gifts. The Doha Heritage velvet hamper blew my sister away. Impeccable!”
+            </p>
+            <div class="review-author-row">
+              <img class="review-avatar" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=120&q=80" alt="Sarah Jenkins" />
+              <div>
+                <div class="review-name">Sarah Jenkins</div>
+                <div class="review-location">📍 West Bay, Doha</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">
+              “The website is smooth, prices are fair in QAR, and Cash on Delivery is seamless. The French linen bedding is the softest I’ve ever slept on.”
+            </p>
+            <div class="review-author-row">
+              <img class="review-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80" alt="Noora Al-Marri" />
+              <div>
+                <div class="review-name">Noora Al-Marri</div>
+                <div class="review-location">📍 Al Waab</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         10. INSTAGRAM COMMUNITY SHOWCASE
+         ======================================================================== -->
+    <section class="insta-section">
+      <div class="container">
+        
+        <div class="section-header" style="margin-bottom: 36px;">
+          <span class="section-label">Follow Along</span>
+          <h2 class="section-title">#WhoohuQatar</h2>
+          <p class="section-subtitle">Tag @WhoohuStore on Instagram to be featured in our Doha community gallery.</p>
+        </div>
+
+        <div class="insta-grid">
+          <div class="insta-item">
+            <img class="insta-img" src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=500&q=80" alt="Fashion in Doha" />
+            <div class="insta-overlay">❤️</div>
+          </div>
+          <div class="insta-item">
+            <img class="insta-img" src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=500&q=80" alt="Ceramics table setting" />
+            <div class="insta-overlay">❤️</div>
+          </div>
+          <div class="insta-item">
+            <img class="insta-img" src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=500&q=80" alt="Ambient lantern" />
+            <div class="insta-overlay">❤️</div>
+          </div>
+          <div class="insta-item">
+            <img class="insta-img" src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=500&q=80" alt="Royal oud bottle" />
+            <div class="insta-overlay">❤️</div>
+          </div>
+          <div class="insta-item">
+            <img class="insta-img" src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=500&q=80" alt="Saddle bag detail" />
+            <div class="insta-overlay">❤️</div>
+          </div>
+          <div class="insta-item">
+            <img class="insta-img" src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=500&q=80" alt="Luxury hamper gift" />
+            <div class="insta-overlay">❤️</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         11. NEWSLETTER (Whoohu Club Qatar)
+         ======================================================================== -->
+    <section class="newsletter-section" id="newsletter">
+      <div class="container">
+        <div class="newsletter-box">
+          <h2 class="newsletter-title">Join the Whoohu Family</h2>
+          <p class="newsletter-desc">
+            Subscribe to receive 10% off your first order, private invitations to secret Qatar sales, and weekly edits of new arrivals.
+          </p>
+
+          <form class="newsletter-form" id="newsletterForm">
+            <input 
+              type="email" 
+              class="newsletter-input" 
+              id="newsletterEmail" 
+              placeholder="Enter your email address…" 
+              required 
+            />
+            <button type="submit" class="btn btn-peach">
+              Subscribe & Save 10%
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       12. FOOTER
+       ======================================================================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        
+        <!-- Brand Info -->
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo-symbol">
+              <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                <path d="M5 8L10 24L16 11L22 24L27 8" stroke="#F8F5EE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="16" cy="7" r="2.5" fill="#D98A72"/>
+              </svg>
+            </div>
+            <div class="logo-title" style="color: var(--c-white);">Whoohu <span>Store</span></div>
+          </div>
+
+          <p class="footer-mission">
+            “Find something you’ll love.” Whoohu makes everyday online shopping simple, stylish, convenient, and enjoyable across Qatar.
+          </p>
+
+          <div class="footer-socials">
+            <a href="#" class="social-link" aria-label="Instagram">IG</a>
+            <a href="#" class="social-link" aria-label="WhatsApp">WA</a>
+            <a href="#" class="social-link" aria-label="TikTok">TT</a>
+            <a href="#" class="social-link" aria-label="Snapchat">SC</a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="footer-col-title">Explore Store</h4>
+          <ul class="footer-links">
+            <li><a href="#catalog" class="footer-link" onclick="filterByTab('fashion');">Fashion Collection</a></li>
+            <li><a href="#catalog" class="footer-link" onclick="filterByTab('beauty');">Beauty & Fragrances</a></li>
+            <li><a href="#catalog" class="footer-link" onclick="filterByTab('gadgets');">Tech & Smart Living</a></li>
+            <li><a href="#catalog" class="footer-link" onclick="filterByTab('home');">Home & Kitchen Ware</a></li>
+            <li><a href="#catalog" class="footer-link" onclick="filterByTab('gifts');">Curated Gift Boxes</a></li>
+            <li><a href="#catalog" class="footer-link" onclick="filterByTab('new');">New Arrivals</a></li>
+          </ul>
+        </div>
+
+        <!-- Customer Care -->
+        <div>
+          <h4 class="footer-col-title">Customer Care</h4>
+          <ul class="footer-links">
+            <li><a href="javascript:void(0)" class="footer-link" onclick="showToast('Qatar shipping: Free over 250 QAR • Same-day in Doha', '🚚');">Delivery Policy Qatar</a></li>
+            <li><a href="javascript:void(0)" class="footer-link" onclick="showToast('14-Day Free Returns with doorstep pickup in Qatar', '🔄');">Returns & Exchanges</a></li>
+            <li><a href="javascript:void(0)" class="footer-link" onclick="showToast('Authenticity 100% Guaranteed by Whoohu Store', '🛡️');">Authenticity Guarantee</a></li>
+            <li><a href="javascript:void(0)" class="footer-link" onclick="showToast('Track your order with SMS / WhatsApp link', '📦');">Track Order</a></li>
+            <li><a href="javascript:void(0)" class="footer-link" onclick="openCartDrawer();">View Shopping Bag</a></li>
+            <li><a href="https://wa.me/97400000000" target="_blank" class="footer-link">WhatsApp Help (+974)</a></li>
+          </ul>
+        </div>
+
+        <!-- Qatar Locations Covered -->
+        <div>
+          <h4 class="footer-col-title">Delivery Municipalities</h4>
+          <ul class="footer-links" style="font-size: 0.85rem; color: rgba(248, 245, 238, 0.65);">
+            <li>✓ Doha (West Bay, The Pearl, Al Waab)</li>
+            <li>✓ Lusail City & Marina</li>
+            <li>✓ Al Rayyan & Education City</li>
+            <li>✓ Al Wakrah & Al Wukair</li>
+            <li>✓ Al Khor & Al Daayen</li>
+            <li>✓ Umm Salal & Al Shamal</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 Whoohu Store LLC. Qatar. All rights reserved. “Find something you’ll love.”
+        </div>
+
+        <div class="footer-payments">
+          <span class="payment-badge">🇶🇦 QPay</span>
+          <span class="payment-badge"> Apple Pay</span>
+          <span class="payment-badge">Visa</span>
+          <span class="payment-badge">Mastercard</span>
+          <span class="payment-badge">Cash on Delivery</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       13. SLIDE-OUT CART DRAWER
+       ======================================================================== -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <div class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart Drawer">
+    <div class="drawer-header">
+      <h3 class="drawer-title">
+        <span>Shopping Bag</span>
+      </h3>
+      <button class="drawer-close-btn" id="cartCloseBtn" aria-label="Close cart">✕</button>
+    </div>
+
+    <!-- Free Delivery Progress Bar -->
+    <div class="shipping-progress-box">
+      <div class="shipping-progress-text" id="shippingProgressText">
+        <span>Add 250 QAR for FREE Qatar Delivery</span>
+        <span>0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="shippingProgressBar" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Cart Items Container -->
+    <div class="cart-drawer-items" id="cartDrawerItems">
+      <!-- Populated via renderCart() -->
+    </div>
+
+    <!-- Cart Footer & Checkout -->
+    <div class="cart-drawer-footer" id="cartDrawerFooter">
+      <div class="promo-row">
+        <input type="text" class="promo-input" id="promoCodeInput" placeholder="Promo code (e.g. QATAR10)" />
+        <button class="btn btn-secondary btn-sm" id="applyPromoBtn">Apply</button>
+      </div>
+
+      <div class="cart-summary-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotalAmount">0 QAR</span>
+      </div>
+      <div class="cart-summary-row" id="cartDiscountRow" style="display: none; color: var(--c-peach-dark);">
+        <span>Discount</span>
+        <span id="cartDiscountAmount">-0 QAR</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Qatar Delivery</span>
+        <span id="cartShippingAmount">25 QAR</span>
+      </div>
+
+      <div class="cart-total-row">
+        <span>Total (QAR)</span>
+        <span id="cartGrandTotalAmount">0 QAR</span>
+      </div>
+
+      <button class="btn btn-primary btn-lg checkout-btn" id="proceedToCheckoutBtn">
+        Proceed to Checkout →
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       14. MOBILE NAVIGATION DRAWER
+       ======================================================================== -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer">
+    <div class="mobile-nav-header">
+      <div class="logo-title">Whoohu <span>Store</span></div>
+      <button class="drawer-close-btn" id="mobileNavClose">✕</button>
+    </div>
+
+    <div class="mobile-nav-links">
+      <a href="#catalog" class="mobile-nav-link" data-category="all">Shop All Products <span>→</span></a>
+      <a href="#catalog" class="mobile-nav-link" data-category="fashion">Fashion <span>→</span></a>
+      <a href="#catalog" class="mobile-nav-link" data-category="beauty">Beauty & Perfumes <span>→</span></a>
+      <a href="#catalog" class="mobile-nav-link" data-category="gadgets">Smart Gadgets <span>→</span></a>
+      <a href="#catalog" class="mobile-nav-link" data-category="home">Home & Kitchen <span>→</span></a>
+      <a href="#catalog" class="mobile-nav-link" data-category="gifts">Gifts & Keepsakes <span>→</span></a>
+      <a href="#catalog" class="mobile-nav-link" data-category="new">New Arrivals <span class="nav-badge-new">NEW</span></a>
+    </div>
+
+    <div class="mobile-nav-footer">
+      <div style="font-size: 0.85rem; color: var(--c-charcoal-muted); margin-bottom: 12px;">
+        🇶🇦 Express delivery to all Qatar municipalities
+      </div>
+      <button class="btn btn-primary" style="width: 100%;" onclick="openCartDrawer(); document.getElementById('mobileNavDrawer').classList.remove('active');">
+        View Bag
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       15. PRODUCT QUICK VIEW MODAL
+       ======================================================================== -->
+  <div class="modal-overlay" id="quickViewModalOverlay">
+    <div class="quickview-modal">
+      <button class="modal-close-btn" id="quickViewCloseBtn" aria-label="Close modal">✕</button>
+      <div id="quickViewModalContent">
+        <!-- Injected via openProductQuickView() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       16. CHECKOUT MODAL (Full Qatar Localization)
+       ======================================================================== -->
+  <div class="modal-overlay" id="checkoutModalOverlay">
+    <div class="checkout-modal-card">
+      <button class="modal-close-btn" id="checkoutCloseBtn" aria-label="Close checkout">✕</button>
+      
+      <div id="checkoutContentArea">
+        <div class="checkout-header">
+          <div class="badge badge-forest" style="margin-bottom: 12px;">🇶🇦 Fast Qatar Delivery</div>
+          <h2 class="checkout-header-title">Secure Checkout</h2>
+          <p style="color: var(--c-charcoal-muted); font-size: 0.95rem;">Complete your order for fast dispatch in Qatar.</p>
+        </div>
+
+        <form id="checkoutForm">
+          <div class="checkout-grid">
+            
+            <!-- Left: Delivery Details & Payment -->
+            <div>
+              <div class="checkout-form-section">
+                <h4 class="checkout-section-title">
+                  <span>📍 1. Delivery Details (Qatar)</span>
+                </h4>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" class="form-input" placeholder="e.g. Fatima Al-Kuwari" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Qatar Mobile Phone (+974) *</label>
+                    <input type="tel" class="form-input" placeholder="+974 55XX XXXX" required />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Email Address *</label>
+                    <input type="email" class="form-input" placeholder="yourname@domain.qa" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Municipality / City *</label>
+                    <select class="form-select" required>
+                      <option value="doha">Doha (West Bay, The Pearl, Al Waab, etc.)</option>
+                      <option value="lusail">Lusail City</option>
+                      <option value="rayyan">Al Rayyan</option>
+                      <option value="wakrah">Al Wakrah & Al Wukair</option>
+                      <option value="khor">Al Khor</option>
+                      <option value="ummsalal">Umm Salal</option>
+                      <option value="daayen">Al Daayen</option>
+                      <option value="other">Other Qatar Location</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Zone & Street Name *</label>
+                    <input type="text" class="form-input" placeholder="e.g. Zone 66, Lusail Marina Blvd" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Building / Villa No. *</label>
+                    <input type="text" class="form-input" placeholder="e.g. Tower 4, Apt 1402" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Delivery Note (Optional)</label>
+                  <input type="text" class="form-input" placeholder="e.g. Leave with reception or call on arrival" />
+                </div>
+              </div>
+
+              <!-- Payment Method Selection -->
+              <div class="checkout-form-section">
+                <h4 class="checkout-section-title">
+                  <span>💳 2. Payment Method</span>
+                </h4>
+
+                <div class="payment-selector">
+                  <div class="payment-opt active" data-method="applepay">
+                    <span style="font-size: 1.3rem;"></span>
+                    <div>
+                      <div class="payment-opt-title">Apple Pay</div>
+                      <small style="color: var(--c-charcoal-light);">Instant 1-touch</small>
+                    </div>
+                  </div>
+
+                  <div class="payment-opt" data-method="qpay">
+                    <span style="font-size: 1.3rem;">🇶🇦</span>
+                    <div>
+                      <div class="payment-opt-title">QPay / Debit</div>
+                      <small style="color: var(--c-charcoal-light);">Qatar NAPS cards</small>
+                    </div>
+                  </div>
+
+                  <div class="payment-opt" data-method="card">
+                    <span style="font-size: 1.3rem;">💳</span>
+                    <div>
+                      <div class="payment-opt-title">Credit Card</div>
+                      <small style="color: var(--c-charcoal-light);">Visa / Mastercard</small>
+                    </div>
+                  </div>
+
+                  <div class="payment-opt" data-method="cod">
+                    <span style="font-size: 1.3rem;">💵</span>
+                    <div>
+                      <div class="payment-opt-title">Cash on Delivery</div>
+                      <small style="color: var(--c-charcoal-light);">Pay at doorstep</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                Confirm & Place Order →
+              </button>
+            </div>
+
+            <!-- Right: Order Summary -->
+            <div style="background-color: var(--c-cream); border-radius: var(--radius-md); padding: 24px; height: fit-content;">
+              <h4 style="font-size: 1.1rem; color: var(--c-forest); margin-bottom: 16px; border-bottom: 1px solid var(--c-border); padding-bottom: 10px;">
+                Order Summary
+              </h4>
+              <div id="checkoutSummaryItems">
+                <!-- Populated via openCheckoutModal() -->
+              </div>
+
+              <div style="margin-top: 20px; font-size: 0.8rem; color: var(--c-charcoal-muted); line-height: 1.5; background: var(--c-white); padding: 12px; border-radius: var(--radius-xs);">
+                🔒 <strong>Safe & Encrypted Checkout:</strong> Your personal data is protected by 256-bit SSL encryption. Free Qatar returns within 14 days.
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       17. THEME COLOR CUSTOMIZER MODAL & TRIGGER
+       ======================================================================== -->
+  <!-- Floating Theme Trigger Button -->
+  <button class="theme-trigger-btn" id="themeTriggerBtn" aria-label="Change Theme Colors" title="Customize Store Colors">
+    <div class="theme-palette-dots">
+      <span class="theme-palette-dot" style="background-color: var(--c-forest);"></span>
+      <span class="theme-palette-dot" style="background-color: var(--c-peach);"></span>
+      <span class="theme-palette-dot" style="background-color: var(--c-cream);"></span>
+    </div>
+    <span>Theme Colors</span>
+  </button>
+
+  <!-- Theme Customizer Modal -->
+  <div class="modal-overlay" id="themeModalOverlay">
+    <div class="theme-modal-card">
+      <button class="modal-close-btn" id="themeCloseBtn" aria-label="Close theme customizer">✕</button>
+      
+      <h3 class="theme-modal-title">Customize Website Theme</h3>
+      <p class="theme-modal-desc">
+        Pick a curated luxury palette or choose custom hex colors. Changes apply instantly across the entire store and are saved automatically.
+      </p>
+
+      <!-- Presets -->
+      <span class="theme-section-heading">Curated Luxury Palettes</span>
+      <div class="theme-presets-grid" id="themePresetsGrid">
+        <!-- Injected via renderThemePresets() -->
+      </div>
+
+      <!-- Live Pickers -->
+      <span class="theme-section-heading">Custom Brand Colors</span>
+      <div class="custom-pickers-grid">
+        <div class="picker-group">
+          <label class="picker-label">Primary Color</label>
+          <div class="picker-input-row">
+            <input type="color" class="picker-color-input" id="primaryColorInput" value="#183C2B" />
+            <span class="picker-hex-val" id="primaryHexVal">#183C2B</span>
+          </div>
+        </div>
+
+        <div class="picker-group">
+          <label class="picker-label">Accent Highlight</label>
+          <div class="picker-input-row">
+            <input type="color" class="picker-color-input" id="accentColorInput" value="#D98A72" />
+            <span class="picker-hex-val" id="accentHexVal">#D98A72</span>
+          </div>
+        </div>
+
+        <div class="picker-group">
+          <label class="picker-label">Background</label>
+          <div class="picker-input-row">
+            <input type="color" class="picker-color-input" id="bgColorInput" value="#F8F5EE" />
+            <span class="picker-hex-val" id="bgHexVal">#F8F5EE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Snippet Box for Permanent Edits -->
+      <span class="theme-section-heading">How to change in code (styles/main.css):</span>
+      <div class="theme-code-container">
+        <button class="theme-copy-btn" id="copyThemeCssBtn">Copy CSS</button>
+        <pre class="theme-code-text" id="themeCodeDisplay"></pre>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="scripts/products.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>
+
